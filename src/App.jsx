@@ -17,24 +17,7 @@ function App() {
   const [userProfile, setUserProfile] = useState(null);
   const [isFading, setIsFading] = useState(false);
 
-  useEffect(() => {
-    const critical = [boardArt, introArt];
-    
-    // Construct the static paths for every possible coin side
-    const coinImages = coinsData.flatMap(coin => [
-      `/coins/${coin.id}_coin_of_${coin.name}_${coin.a.toLowerCase()}.webp`,
-      `/coins/${coin.id}_coin_of_${coin.name}_${coin.b.toLowerCase()}.webp`
-    ]);
-
-    [...critical, ...coinImages].forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-    
-    console.log("Ink Drinker: Inscribing 40 coins into browser memory...");
-  }, []);
-  
-  // --- THE VAULT PLUMBING ---
+   // --- THE VAULT PLUMBING ---
   const saveToDb = async (slotId, coinPath, bookUrl) => {
     if (!userProfile?.id) return;
 
@@ -176,18 +159,7 @@ function App() {
       setIsFading(false);
     }, 1000);
   };
-
-  // Add this inside the App component, before the return
-  useEffect(() => {
-    // Preload just the board art and a few common coins
-    const imagesToPreload = [boardArt, introArt];
-    
-    imagesToPreload.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, []);
-  
+ 
   return (
     <>
       {/* 1. THE SPLASH */}
