@@ -6,7 +6,7 @@ export default function CoinModal({ coin, onSelect, onClose }) {
 
   const getCoinImg = (sideName) => {
     const fileName = `${coin.id}_coin_of_${coin.name}_${sideName.toLowerCase()}.webp`;
-    return new URL(`../assets/${fileName}`, import.meta.url).href;
+    return new URL(`/coins/${fileName}`, import.meta.url).href;
   };
 
   const needsArticle = ["wound", "heart", "forge", "relic", "bond", "mirage"]; // Add any others here
