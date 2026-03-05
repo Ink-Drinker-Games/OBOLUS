@@ -1,0 +1,52 @@
+ Volume in drive C is OS
+ Volume Serial Number is 7CFA-ABD2
+
+ Directory of C:\Users\cpack\Documents\obolus\src\assets
+
+03/04/2026  08:40 PM    <DIR>          .
+03/04/2026  07:55 PM    <DIR>          ..
+03/04/2026  07:42 PM           213,002 01_coin_of_belonging_exile.webp
+03/04/2026  07:42 PM           280,438 01_coin_of_belonging_home.webp
+03/04/2026  07:42 PM           205,896 02_coin_of_radiance_light.webp
+03/04/2026  07:42 PM           179,758 02_coin_of_radiance_shadow.webp
+03/04/2026  07:42 PM           200,236 03_coin_of_relic_keepsake.webp
+03/04/2026  07:42 PM           261,920 03_coin_of_relic_lockbox.webp
+03/04/2026  07:42 PM           181,186 04_coin_of_voice_silence.webp
+03/04/2026  07:42 PM           216,744 04_coin_of_voice_sound.webp
+03/04/2026  07:42 PM           227,816 05_coin_of_temptation_desire.webp
+03/04/2026  07:42 PM           224,876 05_coin_of_temptation_restraint.webp
+03/04/2026  07:42 PM           239,704 06_coin_of_belief_doubt.webp
+03/04/2026  07:42 PM           242,172 06_coin_of_belief_faith.webp
+03/04/2026  07:42 PM           143,666 07_coin_of_wound_blade.webp
+03/04/2026  07:42 PM           197,208 07_coin_of_wound_scar.webp
+03/04/2026  07:42 PM           205,672 08_coin_of_revelation_illusion.webp
+03/04/2026  07:42 PM           203,378 08_coin_of_revelation_truth.webp
+03/04/2026  07:42 PM           224,028 09_coin_of_heart_hatred.webp
+03/04/2026  07:42 PM           242,588 09_coin_of_heart_love.webp
+03/04/2026  07:42 PM           145,850 10_coin_of_motion_flight.webp
+03/04/2026  07:42 PM           146,326 10_coin_of_motion_stillness.webp
+03/04/2026  07:42 PM           195,526 11_coin_of_self_innocence.webp
+03/04/2026  07:42 PM           196,360 11_coin_of_self_knowing.webp
+03/04/2026  07:42 PM           161,810 12_coin_of_obedience_loyalty.webp
+03/04/2026  07:42 PM           239,976 12_coin_of_obedience_rebellion.webp
+03/04/2026  07:42 PM           249,386 13_coin_of_balance_chaos.webp
+03/04/2026  07:42 PM           159,332 13_coin_of_balance_order.webp
+03/04/2026  07:42 PM           138,302 14_coin_of_fear_dread.webp
+03/04/2026  07:42 PM           142,750 14_coin_of_fear_hope.webp
+03/04/2026  07:42 PM           185,370 15_coin_of_forge_creation.webp
+03/04/2026  07:42 PM           173,626 15_coin_of_forge_destruction.webp
+03/04/2026  07:42 PM           256,758 16_coin_of_bond_escape.webp
+03/04/2026  07:42 PM           281,654 16_coin_of_bond_remain.webp
+03/04/2026  07:42 PM           190,270 17_coin_of_flame_extinguish.webp
+03/04/2026  07:42 PM           213,758 17_coin_of_flame_kindle.webp
+03/04/2026  07:42 PM           144,960 18_coin_of_sight_clarity.webp
+03/04/2026  07:42 PM           178,086 18_coin_of_sight_mystery.webp
+03/04/2026  07:42 PM           173,062 19_coin_of_fate_destiny.webp
+03/04/2026  07:42 PM           174,452 19_coin_of_fate_freedom.webp
+03/04/2026  07:42 PM           195,546 20_coin_of_mirage_desert.webp
+03/04/2026  07:42 PM           171,824 20_coin_of_mirage_oasis.webp
+03/04/2026  08:40 PM               164 assets.txt
+03/04/2026  07:42 PM           490,792 obolus-ledger.webp
+03/02/2026  04:55 PM             4,126 react.svg
+              43 File(s)      8,500,354 bytes
+               2 Dir(s)  571,958,308,864 bytes free

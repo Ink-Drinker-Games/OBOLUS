@@ -1,0 +1,478 @@
+@font-face {
+  font-family: 'Cinzel Decorative';
+  src: url('/cinzel_decorative.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Castelar';
+  src: url('/castelar.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Quintessential';
+  src: url('/quintessential.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.fade-in {
+  animation: fadeInEffect 1.2s ease-out forwards;
+}
+
+.fade-out {
+  animation: fadeOutEffect 1s ease-in forwards;
+  pointer-events: none;
+}
+
+@keyframes fadeInEffect {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOutEffect {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* App.css - Splash Styles */
+.splash-container {
+  position: fixed;
+  inset: 0;
+  background: #050505;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  cursor: pointer;
+}
+
+.splash-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Keeps the full text spread visible */
+  animation: fadeIn 2s ease-in;
+}
+
+/* --- GLOBAL & WRAPPER --- */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #050505;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: 'Quintessential', serif;
+}
+
+.ledger-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #050505;
+}
+
+.ledger-container {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.board-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- INTERACTIVE OVERLAY --- */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hotspot {
+  position: absolute;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.hotspot.circle { aspect-ratio: 1 / 1; }
+.hotspot.rect { 
+  aspect-ratio: 2 / 3;
+  border: 1px solid rgba(197, 160, 89, 0.1); 
+}
+
+.hotspot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hotspot.circle img {
+  border-radius: 50%;
+  border: 1px solid #c5a059;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.7));
+  transition: transform 0.2s ease-in-out;
+}
+
+.hotspot.circle:hover img {
+  transform: scale(1.03);
+  filter: drop-shadow(4px 8px 12px rgba(0, 0, 0, 0.8)) brightness(1.1);
+}
+
+.hotspot.rect {
+  background: rgba(197, 160, 89, 0.05); 
+  border: 1px dashed rgba(197, 160, 89, 0.2);
+  transition: background 0.3s;
+}
+
+.hotspot.rect:hover {
+  background: rgba(197, 160, 89, 0.15);
+  border: 1px solid #c5a059;
+}
+
+.hotspot.rect img {
+  filter: sepia(0.2) contrast(1.1);
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+/* --- MODALS --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Re-enforce the 600px square frame */
+.modal-content {
+  position: relative;
+  width: 600px !important; 
+  height: 600px !important; 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 60px;
+  box-sizing: border-box;
+}
+
+.modal-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #e6c199;
+  font-family: 'Castelar', serif;
+  font-variant: small-caps;
+  text-align: center;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.title-top {
+  font-size: 0.8rem;
+  letter-spacing: 1.5px;
+  opacity: 0.9;
+}
+
+.title-bottom {
+  font-size: 1.82rem;
+  margin-top: 16px;
+  letter-spacing: 2px;
+}
+
+/* Unique styling for the Entrance Screen only */
+.entrance-title {
+  margin-bottom: 50px !important; /* Extra breathing room for the landing */
+}
+
+.entrance-title .title-top {
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  color: rgba(197, 160, 89, 0.7);
+}
+
+.entrance-title .title-bottom {
+  font-size: 3.8rem; /* Make it feel like a true title card */
+  letter-spacing: 8px;
+  margin-top: 2px;
+}
+
+/* --- ENTRANCE SPECIFIC LAYOUT --- */
+
+/* This controls the gap between the Title and the first Input */
+.inscription-container.entrance-fields {
+  margin-top: -30px !important; /* Increase this to push the fields further down */
+  gap: 30px !important;        /* This controls the gap between the Name and PIN fields */
+}
+
+.inscribe-button.entrance-button {
+  margin-top: 15px !important; /* Increase this to push the fields further down */
+}
+
+/* Optional: If the inputs feel too cramped inside the bronze frame */
+.entrance-fields .book-input {
+  margin-bottom: 0px; 
+}
+
+/* Coin Selection Grid in Modal */
+.coin-options {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important; 
+  align-items: flex-start !important;
+  gap: 50px !important; /* Forces physical space between the two circles */
+  width: 100% !important;
+  margin-top: 20px;
+  box-sizing: border-box;
+}
+
+.coin-option {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 180px !important; /* Tight constraint */
+  flex-shrink: 0 !important; /* Prevent overlap squishing */
+  cursor: pointer;
+}
+
+.coin-frame {
+  position: relative;
+  width: 180px !important;
+  height: 180px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* THE VENN FIX: Prevent the images from expanding beyond the 180px frame */
+.coin-frame img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 180px !important;
+  max-height: 180px !important;
+  object-fit: cover !important;
+  border-radius: 50%;
+}
+
+.coin-frame::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #c5a059;
+  border-radius: 50%;
+  pointer-events: none;
+  box-sizing: border-box;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.coin-label {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.1rem;
+  color: #c5a059;
+  text-transform: capitalize;
+  letter-spacing: 2px;
+  margin-top: 10px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+}
+
+/* --- COIN HOVER LOGIC --- */
+
+/* Standard Coin Hover (Gap 0.95 -> 0.97) */
+.coin-option:not(:has(img[alt="hope"])):not(:has(img[alt="dread"])) img {
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+  border-radius: 50%;
+}
+
+.coin-option:not(:has(img[alt="hope"])):not(:has(img[alt="dread"])):hover img {
+  transform: scale(0.97);
+  filter: brightness(1.1);
+}
+
+.coin-option:not(:has(img[alt="hope"])):not(:has(img[alt="dread"])):hover .coin-frame::after {
+  box-shadow: 0 0 20px #c5a059, inset 0 0 10px #c5a059;
+  border-color: #f0d090;
+}
+
+/* Artifact Overrides (Fear/Dread/Hope) */
+.coin-option:has(img[alt="hope"]), 
+.coin-option:has(img[alt="dread"]) {
+  overflow: visible !important;
+}
+
+.coin-option:has(img[alt="hope"]):hover, 
+.coin-option:has(img[alt="dread"]):hover {
+  box-shadow: none !important; /* Kills square glow */
+}
+
+img[alt="hope"], img[alt="dread"] {
+  transform: scale(0.95) translateY(-7px) translateX(1px) !important;
+  width: 180px !important;
+  height: 220px !important; 
+  border-radius: 0 !important;
+  object-fit: contain !important;
+  background: transparent !important;
+  border: none !important;
+  z-index: 3;
+  transition: transform 0.3s ease, filter 0.3s ease; /* Smooths the transition */
+}
+
+.coin-option:has(img[alt="hope"]):hover img, 
+.coin-option:has(img[alt="dread"]):hover img {
+  transform: scale(1.02) translateY(-7px) translateX(1px) !important;
+  filter: brightness(1.1);
+}
+
+/* 1. Target the gold circle UNDER the Fear/Dread art */
+.coin-option:has(img[alt="hope"]) .coin-frame::after,
+.coin-option:has(img[alt="dread"]) .coin-frame::after {
+  transition: all 0.3s ease; /* Smoothly lights up */
+}
+
+/* 2. Turn on the CIRCULAR glow when hovering the container */
+.coin-option:has(img[alt="hope"]):hover .coin-frame::after,
+.coin-option:has(img[alt="dread"]):hover .coin-frame::after {
+  box-shadow: 0 0 20px #c5a059, inset 0 0 10px #c5a059 !important;
+  border-color: #f0d090 !important; /* Brighter gold circle */
+}
+
+/* --- BOOK MODAL SPECIFICS --- */
+.modal-content.book-modal {
+  padding-top: 70px !important;
+  padding-bottom: 110px !important;
+}
+
+.inscription-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 85%;
+  margin-top: 30px;
+  gap: 25px;
+}
+
+.book-input {
+  background: rgba(0, 0, 0, 0.6) !important;
+  border: 1px solid #c5a059 !important;
+  color: #e6c199 !important;
+  font-family: 'Quintessential', cursive !important;
+  font-size: 1rem;
+  padding: 10px 15px !important;
+  width: 100%;
+  outline: none;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+  transition: all 0.3s ease;
+}
+
+.book-input::placeholder {
+  color: rgba(197, 160, 89, 0.4);
+  font-style: italic;
+}
+
+.book-input:focus {
+  border-color: #f0d090;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.9), 0 0 10px rgba(197, 160, 89, 0.2);
+}
+
+.inscribe-button {
+  margin-top: 25px;
+  background: transparent;
+  border: 1px solid #c5a059;
+  color: #c5a059;
+  font-family: 'Castelar', serif;
+  font-variant: small-caps;
+  padding: 10px 40px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+
+.inscribe-button:hover {
+  background: rgba(197, 160, 89, 0.1);
+  color: #f0d090;
+  box-shadow: 0 0 20px rgba(197, 160, 89, 0.2);
+}
+
+.inscription-hint {
+  margin-top: 30px;
+  font-family: 'Quintessential', cursive;
+  font-size: 0.70rem;
+  color: rgba(197, 160, 89, 0.6);
+  max-width: 450px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* --- UTILITY BUTTONS --- */
+.clear-button {
+  margin-top: 28px; 
+  margin-left: 370px;
+  background: transparent;
+  border: none !important; 
+  color: rgba(197, 160, 89, 0.4); 
+  font-family: 'Quintessential', cursive;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  padding: 5px 0px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  text-transform: none;
+  outline: none;
+}
+
+.clear-button:hover {
+  color: rgba(230, 193, 153, 0.9);
+  background: transparent !important;
+  text-shadow: 0 0 8px rgba(197, 160, 89, 0.4);
+  transform: translateY(-1px);
+}
+
+.book-modal .clear-button {
+  margin-top: auto;
+  margin-left: 370px;
+  margin-bottom: 0;
+}
+
+/* --- SELECTION LOCK --- */
+img, .coin-label, .modal-title, .clear-button, .modal-content {
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+  pointer-events: none; /* Prevents double-clicking during the fade */
+}
+
+/* Ensure the ledger itself fades IN so it doesn't just pop under the modal */
+.ledger-wrapper {
+  animation: fadeInEffect 1.5s ease-in;
+}

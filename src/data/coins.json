@@ -1,0 +1,22 @@
+[
+  { "id": "01", "name": "belonging", "a": "home", "b": "exile" },
+  { "id": "02", "name": "radiance", "a": "light", "b": "shadow" },
+  { "id": "03", "name": "relic", "a": "keepsake", "b": "lockbox" },
+  { "id": "04", "name": "voice", "a": "sound", "b": "silence" },
+  { "id": "05", "name": "temptation", "a": "desire", "b": "restraint" },
+  { "id": "06", "name": "belief", "a": "faith", "b": "doubt" },
+  { "id": "07", "name": "wound", "a": "blade", "b": "scar" },
+  { "id": "08", "name": "revelation", "a": "truth", "b": "illusion" },
+  { "id": "09", "name": "heart", "a": "love", "b": "hatred" },
+  { "id": "10", "name": "motion", "a": "flight", "b": "stillness" },
+  { "id": "11", "name": "self", "a": "innocence", "b": "knowing" },
+  { "id": "12", "name": "obedience", "a": "loyalty", "b": "rebellion" },
+  { "id": "13", "name": "balance", "a": "order", "b": "chaos" },
+  { "id": "14", "name": "fear", "a": "hope", "b": "dread" },
+  { "id": "15", "name": "forge", "a": "creation", "b": "destruction" },
+  { "id": "16", "name": "bond", "a": "remain", "b": "escape" },
+  { "id": "17", "name": "flame", "a": "kindle", "b": "extinguish" },
+  { "id": "18", "name": "sight", "a": "clarity", "b": "mystery" },
+  { "id": "19", "name": "fate", "a": "destiny", "b": "freedom" },
+  { "id": "20", "name": "mirage", "a": "oasis", "b": "desert" }
+]
