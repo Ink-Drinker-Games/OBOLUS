@@ -10,6 +10,7 @@ import BroadcastModal from './components/BroadcastModal';
 import { supabase } from './lib/supabaseClient';
 import { toBlob } from 'html-to-image';
 import closingGif from './assets/obolus-complete.gif'; 
+import html2canvas from 'html2canvas';
 
 function App() {
   const [view, setView] = useState('splash');
@@ -80,23 +81,25 @@ function App() {
     if (!ledgerRef.current) return;
 
     try {
-      // 1. Start the render with CORS support enabled
-      const blobPromise = toBlob(ledgerRef.current, {
-        quality: 1,
-        pixelRatio: 2,
+      // This 'hijacks' the specific ledger-container element
+      const canvas = await html2canvas(ledgerRef.current, {
+        useCORS: true,           // Essential for the Storygraph images
+        allowTaint: false,       // Prevents the canvas from locking up
         backgroundColor: '#050505',
-        cacheBust: true,
-        // Attempt to include external images in the canvas render
-        useCORS: true 
+        scale: 2,                // Keeps the resolution high for sharing
+        logging: false           // Keeps your console clean
       });
 
-      const data = [new ClipboardItem({ "image/png": blobPromise })];
-      await navigator.clipboard.write(data);
-      alert("The visual Inscription has been copied to your clipboard.");
+      canvas.toBlob(async (blob) => {
+        if (!blob) return;
+        const data = [new ClipboardItem({ "image/png": blob })];
+        await navigator.clipboard.write(data);
+        alert("The Ledger has been captured and copied to your clipboard.");
+      }, 'image/png');
+
     } catch (err) {
-      console.error("Clipboard Error:", err);
-      // On Localhost, this often fails. On Vercel (HTTPS), it has a better success rate.
-      alert("The browser protected the external book covers from being copied. You can still screenshot your board for the Chronicle!");
+      console.error("Capture Error:", err);
+      alert("The browser blocked the automated capture. A manual screenshot is the safest path.");
     }
   };
 
