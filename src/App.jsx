@@ -20,6 +20,7 @@ function App() {
   const [userProfile, setUserProfile] = useState(null);
   const [isFading, setIsFading] = useState(false);
   const [showClosing, setShowClosing] = useState(false);
+  const proxyUrl = "https://api.allorigins.win/raw?url=";
 
   // MANIFEST STATE
   const [showManifest, setShowManifest] = useState(false);
@@ -197,7 +198,14 @@ function App() {
                       {selections[Number(coin.id)] && <img src={selections[Number(coin.id)]} alt="coin" style={{width: '100%'}} />}
                     </div>
                     <div className="hotspot rect" style={{ top: isTopHalf ? '18.8%' : '70.4%', left: currentLeft, width: '6.1%', height: '15%' }} onClick={() => setActiveBookSlot(coin)}>
-                      {bookCovers[Number(coin.id)] && <img src={bookCovers[Number(coin.id)]} alt="book" style={{width: '100%', height: '100%', objectFit: 'cover'}} />}
+                      {bookCovers[Number(coin.id)] && (
+                        <img 
+                          src={`${proxyUrl}${encodeURIComponent(bookCovers[Number(coin.id)])}`} 
+                          alt="book" 
+                          crossOrigin="anonymous" // MUST be included for the proxy to work
+                          style={{width: '100%', height: '100%', objectFit: 'cover'}} 
+                        />
+                      )}
                     </div>
                   </div>
                 );
