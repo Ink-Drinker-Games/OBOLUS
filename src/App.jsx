@@ -81,25 +81,24 @@ function App() {
     if (!ledgerRef.current) return;
 
     try {
-      // This 'hijacks' the specific ledger-container element
       const canvas = await html2canvas(ledgerRef.current, {
-        useCORS: true,           // Essential for the Storygraph images
-        allowTaint: false,       // Prevents the canvas from locking up
+        // Switch to wsrv.nl - much more stable for image processing
+        proxy: "https://wsrv.nl/?url=", 
+        useCORS: true,
+        allowTaint: false,
         backgroundColor: '#050505',
-        scale: 2,                // Keeps the resolution high for sharing
-        logging: false           // Keeps your console clean
+        scale: 2
       });
 
       canvas.toBlob(async (blob) => {
         if (!blob) return;
         const data = [new ClipboardItem({ "image/png": blob })];
         await navigator.clipboard.write(data);
-        alert("The Ledger has been captured and copied to your clipboard.");
+        alert("The Ledger (with all Inscriptions) has been copied.");
       }, 'image/png');
-
     } catch (err) {
       console.error("Capture Error:", err);
-      alert("The browser blocked the automated capture. A manual screenshot is the safest path.");
+      alert("CORS blocked the capture. Manual screenshot is the safest path.");
     }
   };
 
