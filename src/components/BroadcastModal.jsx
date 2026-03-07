@@ -2,9 +2,11 @@ import React from 'react';
 import frameImage from '../assets/broadcast_frame.webp';
 
 export default function BroadcastModal({ slotId, selections, bookCovers, coinsData, onClose, onNavigate }) {
-  // 1. Force the padding for the ID
-  const paddedId = String(slotId).padStart(2, '0');
-  const currentCoinData = coinsData.find(c => String(c.id) === paddedId);
+  // 1. Convert slotId to a Number immediately for state lookup
+  const numericId = Number(slotId);
+  
+  // 2. Find the coin by comparing Numbers, not padded strings
+  const currentCoinData = coinsData.find(c => Number(c.id) === numericId);
 
   // 2. ONLY attempt to show a caption if a coin actually exists in this slot
   const coinImg = selections[Number(slotId)];
