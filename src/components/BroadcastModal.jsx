@@ -2,28 +2,24 @@ import React from 'react';
 import frameImage from '../assets/broadcast_frame.webp';
 
 export default function BroadcastModal({ slotId, selections, bookCovers, coinsData, onClose, onNavigate }) {
-  // 1. Convert slotId to a Number immediately for state lookup
   const numericId = Number(slotId);
-  
-  // 2. Find the coin by comparing Numbers, not padded strings
   const currentCoinData = coinsData.find(c => Number(c.id) === numericId);
 
-  // 2. ONLY attempt to show a caption if a coin actually exists in this slot
-  const coinImg = selections[Number(slotId)];
-  const bookImg = bookCovers[Number(slotId)];
+  const coinImg = selections[numericId];
+  const bookImg = bookCovers[numericId]; // KEEP THIS LINE
 
-  // 3. Robust side-checking: 
-  // We check if the filename contains 'a.webp' OR if it does NOT contain 'b.webp' 
-  // This handles cases where the default might be Side A.
-  const isSideA = coinImg?.toLowerCase().includes('a.webp');
-  const isSideB = coinImg?.toLowerCase().includes('b.webp');
-
-  // 4. Resolve the label ONLY if we have a coin image
   let sideLabel = "";
-  if (coinImg) {
-    if (isSideA) sideLabel = currentCoinData?.a;
-    else if (isSideB) sideLabel = currentCoinData?.b;
-    else sideLabel = currentCoinData?.a; // Default fallback for valid coin
+  
+  if (coinImg && currentCoinData) {
+    // 1. Force the image path to lowercase for safe matching
+    const imgPathLower = coinImg.toLowerCase();
+    
+    // 2. Dynamically check if the path includes the actual Side B word (e.g., "exile")
+    const sideBWord = currentCoinData.b.toLowerCase();
+    const isSideB = imgPathLower.includes(sideBWord);
+    
+    // 3. Assign the correct label
+    sideLabel = isSideB ? currentCoinData.b : currentCoinData.a;
   }
 
   return (

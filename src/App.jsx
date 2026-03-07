@@ -139,9 +139,16 @@ function App() {
     await supabase.from('ledgers').upsert(payload, { onConflict: 'profile_id,slot_id' });
   };
   
-  const handleCoinSelect = (id, imgPath) => {
+  const handleCoinSelect = async (id, imgPath, side) => {
     const numericId = Number(id);
-    setSelections(prev => ({ ...prev, [numericId]: imgPath }));
+    
+    // Store the path AND the side in your state
+    setSelections(prev => ({ 
+      ...prev, 
+      [numericId]: imgPath 
+  }));
+
+    // Update saveToDb to include the side column
     saveToDb(numericId, imgPath, bookCovers[numericId] || null);
     setActiveCoin(null);
   };
