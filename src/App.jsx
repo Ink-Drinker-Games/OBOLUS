@@ -80,25 +80,45 @@ function App() {
   const handleExport = async () => {
     if (!ledgerRef.current) return;
 
+    // 1. Find all book cover images inside the ledger
+    const images = ledgerRef.current.querySelectorAll('img');
+    const originalSrcs = [];
+
     try {
+      // 2. TEMPORARILY swap the real URLs for proxied URLs
+      images.forEach((img) => {
+        if (img.src.includes('http') && !img.src.includes('wsrv.nl')) {
+          originalSrcs.push({ img, src: img.src });
+          // Manually prepend the proxy
+          img.src = `https://wsrv.nl/?url=${encodeURIComponent(img.src)}`;
+        }
+      });
+
+      // 3. Run the capture now that the URLs are "safe"
       const canvas = await html2canvas(ledgerRef.current, {
-        // Switch to wsrv.nl - much more stable for image processing
-        proxy: "https://wsrv.nl/?url=", 
         useCORS: true,
         allowTaint: false,
         backgroundColor: '#050505',
         scale: 2
       });
 
+      // 4. IMMEDIATELY swap them back so the UI doesn't flicker/break
+      originalSrcs.forEach(({ img, src }) => {
+        img.src = src;
+      });
+
       canvas.toBlob(async (blob) => {
         if (!blob) return;
         const data = [new ClipboardItem({ "image/png": blob })];
         await navigator.clipboard.write(data);
-        alert("The Ledger (with all Inscriptions) has been copied.");
+        alert("The Ledger has been captured and copied.");
       }, 'image/png');
+
     } catch (err) {
       console.error("Capture Error:", err);
-      alert("CORS blocked the capture. Manual screenshot is the safest path.");
+      // Cleanup even if it fails
+      originalSrcs.forEach(({ img, src }) => { img.src = src; });
+      alert("CORS security blocked the capture. Please use a manual screenshot.");
     }
   };
 
