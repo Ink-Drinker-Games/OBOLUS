@@ -1,24 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react'; // Add useState here
 import frameImage from '../assets/broadcast_frame.webp';
 
 export default function BroadcastModal({ slotId, selections, bookCovers, coinsData, onClose, onNavigate }) {
+  // Add state for the custom dropdown
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const numericId = Number(slotId);
   const currentCoinData = coinsData.find(c => Number(c.id) === numericId);
 
   const coinImg = selections[numericId];
-  const bookImg = bookCovers[numericId]; // KEEP THIS LINE
+  const bookImg = bookCovers[numericId]; 
 
   let sideLabel = "";
-  
   if (coinImg && currentCoinData) {
-    // 1. Force the image path to lowercase for safe matching
     const imgPathLower = coinImg.toLowerCase();
-    
-    // 2. Dynamically check if the path includes the actual Side B word (e.g., "exile")
     const sideBWord = currentCoinData.b.toLowerCase();
     const isSideB = imgPathLower.includes(sideBWord);
-    
-    // 3. Assign the correct label
     sideLabel = isSideB ? currentCoinData.b : currentCoinData.a;
   }
 
@@ -26,19 +23,34 @@ export default function BroadcastModal({ slotId, selections, bookCovers, coinsDa
     <div className="broadcast-content" style={{ backgroundImage: `url(${frameImage})` }}>
       
       <div className="broadcast-controls-header">
-        <div className="dropdown-wrapper">
-          <select 
-            className="ghost-select"
-            value={slotId} 
-            onChange={(e) => onNavigate(e.target.value)}
-          >
-            {coinsData.map((coin) => (
-              <option key={coin.id} value={coin.id}>
-                {`THE COIN OF ${coin.name}`.toUpperCase()}
-              </option>
-            ))}
-          </select>
-          <span className="dropdown-arrow">▼</span>
+        {/* NEW CUSTOM DROPDOWN */}
+        <div className="custom-dropdown-container" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+          
+          <div className="custom-dropdown-selected">
+            {currentCoinData ? `THE COIN OF ${currentCoinData.name}`.toUpperCase() : "SELECT A COIN"}
+            <span className="dropdown-arrow" style={{ position: 'relative', right: '0', marginLeft: '15px' }}>
+              {isDropdownOpen ? '▲' : '▼'}
+            </span>
+          </div>
+
+          {isDropdownOpen && (
+            <ul className="custom-dropdown-list">
+              {coinsData.map((coin) => (
+                <li 
+                  key={coin.id} 
+                  className="custom-dropdown-item"
+                  onClick={(e) => {
+                    e.stopPropagation(); // Stop click from bubbling up
+                    onNavigate(coin.id);
+                    setIsDropdownOpen(false);
+                  }}
+                >
+                  {`THE COIN OF ${coin.name}`.toUpperCase()}
+                </li>
+              ))}
+            </ul>
+          )}
+
         </div>
       </div>
 
