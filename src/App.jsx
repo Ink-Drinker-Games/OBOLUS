@@ -80,21 +80,28 @@ function App() {
   const handleExport = async () => {
     if (!ledgerRef.current) return;
 
-    // 1. Find all book cover images inside the ledger
     const images = ledgerRef.current.querySelectorAll('img');
     const originalSrcs = [];
 
     try {
-      // 2. TEMPORARILY swap the real URLs for proxied URLs
-      images.forEach((img) => {
+      // 1. Swap URLs and track their loading status
+      const loadPromises = Array.from(images).map((img) => {
         if (img.src.includes('http') && !img.src.includes('wsrv.nl')) {
           originalSrcs.push({ img, src: img.src });
-          // Manually prepend the proxy
-          img.src = `https://wsrv.nl/?url=${encodeURIComponent(img.src)}`;
+          
+          return new Promise((resolve) => {
+            img.onload = resolve;
+            img.onerror = resolve; // Continue even if one fails
+            img.src = `https://wsrv.nl/?url=${encodeURIComponent(img.src)}`;
+          });
         }
+        return Promise.resolve();
       });
 
-      // 3. Run the capture now that the URLs are "safe"
+      // 2. WAIT for the browser to actually finish loading the proxied images
+      await Promise.all(loadPromises);
+
+      // 3. Now snap the board
       const canvas = await html2canvas(ledgerRef.current, {
         useCORS: true,
         allowTaint: false,
@@ -102,7 +109,7 @@ function App() {
         scale: 2
       });
 
-      // 4. IMMEDIATELY swap them back so the UI doesn't flicker/break
+      // 4. Restore the original URLs so the UI stays stable
       originalSrcs.forEach(({ img, src }) => {
         img.src = src;
       });
@@ -111,14 +118,13 @@ function App() {
         if (!blob) return;
         const data = [new ClipboardItem({ "image/png": blob })];
         await navigator.clipboard.write(data);
-        alert("The Ledger has been captured and copied.");
+        alert("The Ledger has been captured with all book covers.");
       }, 'image/png');
 
     } catch (err) {
       console.error("Capture Error:", err);
-      // Cleanup even if it fails
       originalSrcs.forEach(({ img, src }) => { img.src = src; });
-      alert("CORS security blocked the capture. Please use a manual screenshot.");
+      alert("CORS security blocked the capture. Try a manual screenshot!");
     }
   };
 
