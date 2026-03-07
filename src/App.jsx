@@ -203,9 +203,8 @@ function App() {
                     <div className="hotspot rect" style={{ top: isTopHalf ? '18.8%' : '70.4%', left: currentLeft, width: '6.1%', height: '15%' }} onClick={() => setActiveBookSlot(coin)}>
                       {bookCovers[Number(coin.id)] && (
                         <img 
-                          src={`${proxyUrl}${encodeURIComponent(bookCovers[Number(coin.id)])}`} 
+                          src={bookCovers[Number(coin.id)]} // BACK TO THE RAW URL
                           alt="book" 
-                          crossOrigin="anonymous" // MUST be included for the proxy to work
                           style={{width: '100%', height: '100%', objectFit: 'cover'}} 
                         />
                       )}
