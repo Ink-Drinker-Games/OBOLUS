@@ -8,8 +8,6 @@ import BookModal from './components/BookModal';
 import EntranceModal from './components/EntranceModal';
 import BroadcastModal from './components/BroadcastModal'; 
 import { supabase } from './lib/supabaseClient';
-import { toBlob } from 'html-to-image';
-import closingGif from './assets/obolus-complete.gif'; 
 import html2canvas from 'html2canvas';
 
 function App() {
@@ -21,7 +19,6 @@ function App() {
   const [userProfile, setUserProfile] = useState(null);
   const [isFading, setIsFading] = useState(false);
   const [showClosing, setShowClosing] = useState(false);
-  const proxyUrl = "https://api.allorigins.win/raw?url=";
 
   // MANIFEST STATE
   const [showManifest, setShowManifest] = useState(false);
@@ -139,7 +136,7 @@ function App() {
     await supabase.from('ledgers').upsert(payload, { onConflict: 'profile_id,slot_id' });
   };
   
-  const handleCoinSelect = async (id, imgPath, side) => {
+  const handleCoinSelect = async (id, imgPath) => {
     const numericId = Number(id);
     
     // Store the path AND the side in your state

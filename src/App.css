@@ -515,16 +515,6 @@ img, .coin-label, .modal-title, .clear-button, .modal-content {
   transform: translateY(-2px);
 }
 
-.ghost-select option {
-  font-size: 0.9rem !important;      /* Shrinks the list text significantly */
-  font-family: 'Quintessential', serif !important; /* Cleaner for smaller lists */
-  background-color: #0d0d0d !important; /* Matches your dark chronicle theme */
-  color: #c5a059 !important;           /* Keeps the bronze tone */
-  letter-spacing: 1px;                 /* Tighter spacing for the smaller list */
-  text-transform: uppercase;
-  padding: 12px;
-}
-
 .manifest-overlay {
   background: rgba(0, 0, 0, 0.98) !important; /* Darker backdrop for focus */
 }
@@ -595,71 +585,6 @@ img, .coin-label, .modal-title, .clear-button, .modal-content {
   z-index: 100;
 }
 
-/* KILL THE WHITE BOX: Force Ghost Look */
-.broadcast-controls-header .ghost-select {
-  appearance: none !important;
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-  background: transparent !important;
-  background-color: transparent !important;
-  border: none !important;
-  color: #e6c199 !important;
-  font-family: 'Castelar', serif;
-  font-size: 1.5rem;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  outline: none !important;
-  
-  /* CENTERING LOGIC */
-  text-align: center;      /* Standard centering */
-  text-align-last: center; /* Ensures the selected value is centered in the box */
-  width: auto;             /* Let it shrink to the text size */
-  
-  padding: 5px 30px 5px 30px;
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
-  cursor: pointer;
-}
-
-.ghost-select option {
-  font-size: 0.75rem !important;      /* Shrinks the list text significantly */
-  font-family: 'Quintessential', serif !important; /* Cleaner for smaller lists */
-  background-color: #0d0d0d !important; /* Matches your dark chronicle theme */
-  color: #c5a059 !important;           /* Keeps the bronze tone */
-  letter-spacing: 1px;                 /* Tighter spacing for the smaller list */
-  text-transform: uppercase;
-  padding: 12px;
-}
-
-/* Fix for the white box shadow/border on some browsers */
-.ghost-select:focus {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-
-
-.dropdown-wrapper {
-  position: relative;
-  display: inline-flex; /* Crucial: This collapses the box to the text width */
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  /* No width: 100% here! */
-}
-
-.dropdown-arrow {
-  position: absolute;
-  /* Adjust this value to move it closer or further from the text */
-  right: 15px; 
-  top: 55%; /* Slight nudge for visual centering with Castelar font */
-  transform: translateY(-50%);
-  font-size: 0.6rem;
-  color: rgba(197, 160, 89, 0.4) !important;
-  pointer-events: none;
-  z-index: 101;
-  transition: color 0.3s ease;
-}
-
 .chronicle-hero-stage {
   flex: 1;
   width: 100%;            
@@ -706,40 +631,6 @@ img, .coin-label, .modal-title, .clear-button, .modal-content {
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 1);
   transform: translateY(-40px); /* Sync with coin nudge */
   display: block !important;
-}
-.broadcast-footer {
-  position: absolute;
-  bottom: -1%; 
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.broadcast-close {
-  background: transparent;
-  border: none;
-  color: rgba(197, 160, 89, 0.4); /* Subdued bronze when idle */
-  font-family: 'Castelar', serif;
-  font-size: 0.75rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  cursor: pointer;
-  
-  /* Smooth transition for the 'Enchantment' effect */
-  transition: all 0.4s ease-in-out; 
-  border-bottom: 1px solid transparent;
-}
-
-.broadcast-close:hover {
-  color: #f0d090 !important; /* Brighter gold on hover */
-  
-  /* The Glow: Uses a soft bronze blur */
-  text-shadow: 0 0 12px rgba(197, 160, 89, 0.7), 0 0 2px rgba(255, 255, 255, 0.3);
-  
-  /* Subtle lift and underline for feedback */
-  transform: translateY(-2px);
-  border-bottom: 1px solid rgba(197, 160, 89, 0.3);
-  opacity: 1;
 }
 
 /* --- THE FINAL CLOSURE --- */
@@ -863,4 +754,21 @@ img, .coin-label, .modal-title, .clear-button, .modal-content {
 .custom-dropdown-item:hover {
   background-color: rgba(197, 160, 89, 0.15);
   color: #f0d090 !important; 
+}
+
+/* --- SUBDUED CHRONICLE CONTROLS --- */
+.subdued-controls .meta-btn {
+  padding: 6px 18px; /* Shrinks the button footprint */
+  opacity: 0.4; /* Fades the button into the background */
+  border: 1px solid rgba(197, 160, 89, 0.15); /* Softer resting border */
+}
+
+.subdued-controls .meta-btn span {
+  font-size: 0.7rem; /* Shrinks the text */
+  letter-spacing: 3px;
+}
+
+.subdued-controls .meta-btn:hover {
+  opacity: 1; /* Snaps back to full visibility on hover */
+  border-color: rgba(197, 160, 89, 0.5);
 }
